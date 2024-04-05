@@ -3,7 +3,11 @@ import { View, Text, StyleSheet, Image } from 'react-native';
 const ProductCard = ({ product }) => {
   return (
     <View style={styles.container}>
-      <Image style={styles.image} source={{ uri: product.image }} />
+      <Image
+        style={styles.image}
+        source={{ uri: product.image }}
+        resizeMode='contain'
+      />
       <View style={styles.body}>
         <Text style={styles.title}>{product.title}</Text>
         <Text style={styles.price}>{product.price} TL</Text>
@@ -15,23 +19,28 @@ const ProductCard = ({ product }) => {
 export default ProductCard;
 const styles = StyleSheet.create({
   container: {
-    padding: 10,
     flexDirection: 'row',
-    alignItems: 'center',
+    margin: 10,
+    borderColor: '#bdbdbd',
+    borderWidth: 1,
+    backgroundColor: '#e0e0e0',
   },
   body: {
-    margin: 10,
+    flex: 1,
+    padding: 10,
+    justifyContent: 'space-between',
   },
   image: {
-    width: 60,
+    width: 100,
     aspectRatio: 1,
   },
   title: {
-    fontSize: 16,
+    fontSize: 18,
     fontWeight: 'bold',
   },
   price: {
     fontSize: 16,
-    color: 'dimgrey',
+    fontStyle: 'italic',
+    textAlign: 'right',
   },
 });

@@ -30,15 +30,21 @@ const Products = () => {
   }, []);
 
   return (
-    <View>
+    <View style={styles.container}>
       {loading ? (
         <ActivityIndicator />
       ) : (
-        <FlatList data={data} renderItem={renderProduct} />
+        <FlatList
+          contentContainerStyle={{ gap: 10 }}
+          data={data}
+          renderItem={renderProduct}
+        />
       )}
     </View>
   );
 };
 
 export default Products;
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {},
+});
