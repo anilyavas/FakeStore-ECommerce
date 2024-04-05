@@ -7,7 +7,7 @@ const ProductCard = ({ product, onSelect }) => {
         <Image
           style={styles.image}
           source={{ uri: product.image }}
-          resizeMode='contain'
+          resizeMode='stretch'
         />
         <View style={styles.body}>
           <Text style={styles.title}>{product.title}</Text>
@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: 100,
-    aspectRatio: 1,
+    height: 100,
   },
   title: {
     fontSize: 18,

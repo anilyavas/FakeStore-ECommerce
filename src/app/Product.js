@@ -9,12 +9,17 @@ const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 const Products = ({ navigation }) => {
   const { data, loading, error } = useFetch(apiUrl);
 
-  const handleProductSelect = () => {
-    navigation.navigate('Detail');
+  const handleProductSelect = (id) => {
+    navigation.navigate('Details', { id });
   };
 
   const renderProduct = ({ item }) => {
-    return <ProductCard product={item} onSelect={handleProductSelect} />;
+    return (
+      <ProductCard
+        product={item}
+        onSelect={() => handleProductSelect(item.id)}
+      />
+    );
   };
 
   if (loading) {
