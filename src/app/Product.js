@@ -8,38 +8,31 @@ import {
 import ProductCard from '../components/ProductCard';
 import axios from 'axios';
 import { useState, useEffect } from 'react';
+import useFetch from '../hooks/useFetch';
 
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
 const Products = () => {
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  const fetchData = async () => {
-    const { data: productData } = await axios.get(apiUrl);
-    setLoading(false);
-    setData(productData);
-  };
+  const { data, loading, error } = useFetch(apiUrl);
 
   const renderProduct = ({ item }) => {
     return <ProductCard product={item} />;
   };
 
-  useEffect(() => {
-    fetchData();
-  }, []);
+  if (loading) {
+    return <ActivityIndicator />;
+  }
+  if (error) {
+    return <Text>Failed to fetch data</Text>;
+  }
 
   return (
     <View style={styles.container}>
-      {loading ? (
-        <ActivityIndicator />
-      ) : (
-        <FlatList
-          contentContainerStyle={{ gap: 10 }}
-          data={data}
-          renderItem={renderProduct}
-        />
-      )}
+      <FlatList
+        contentContainerStyle={{ gap: 10 }}
+        data={data}
+        renderItem={renderProduct}
+      />
     </View>
   );
 };
