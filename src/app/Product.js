@@ -6,11 +6,15 @@ import Loading from '../components/Loading';
 
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
-const Products = () => {
+const Products = ({ navigation }) => {
   const { data, loading, error } = useFetch(apiUrl);
 
+  const handleProductSelect = () => {
+    navigation.navigate('Detail');
+  };
+
   const renderProduct = ({ item }) => {
-    return <ProductCard product={item} />;
+    return <ProductCard product={item} onSelect={handleProductSelect} />;
   };
 
   if (loading) {
