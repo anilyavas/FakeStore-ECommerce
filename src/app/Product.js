@@ -1,14 +1,8 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  FlatList,
-  ActivityIndicator,
-} from 'react-native';
+import { View, StyleSheet, FlatList } from 'react-native';
 import ProductCard from '../components/ProductCard';
-import axios from 'axios';
-import { useState, useEffect } from 'react';
 import useFetch from '../hooks/useFetch';
+import Error from '../components/Error';
+import Loading from '../components/Loading';
 
 const apiUrl = process.env.EXPO_PUBLIC_API_URL;
 
@@ -20,10 +14,10 @@ const Products = () => {
   };
 
   if (loading) {
-    return <ActivityIndicator />;
+    return <Loading />;
   }
   if (error) {
-    return <Text>Failed to fetch data</Text>;
+    return <Error />;
   }
 
   return (
